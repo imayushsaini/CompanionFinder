@@ -1,65 +1,79 @@
- main {
-   min-height: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: self-end;
-   padding: 1rem;
-   position: relative;
- }
+.content {
+  width: 100%;
+  text-align: center;
+}
 
+.header {
+  height: 80vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/banner.jpg");
+  /* Path to your image */
+  background-size: cover;
+  /* Ensures the image covers the entire container */
+  background-position: center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+}
 
- .content {
-   width: 100%;
-   text-align: center;
-   max-width: 700px;
-   margin-bottom: 3rem;
-   display: flex;
-   flex-direction: column;
- }
+.content h1 {
+  margin-top: 1.75rem;
+}
 
- .content h1 {
-   margin-top: 1.75rem;
- }
+.content p {
+  margin-top: 1.5rem;
+}
 
- .content p {
-   margin-top: 1.5rem;
- }
+.heading {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
 
- .title {
-   margin: auto;
- }
+.title {
+  margin: auto;
+  color: whitesmoke;
+}
 
- .features {
-   display: flex;
-   flex-direction: row;
+.features {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
   margin-top: 1rem;
-   .row {
-     width: 100%;
-     text-align: center;
-     min-width: 0;
-     overflow-wrap: break-word;
-     white-space: normal;
 
-     h3 {
-       font-weight: 500;
-     }
-   }
- }
+  .row {
+    margin: 30px;
+    text-align: center;
+    min-width: 0;
+    overflow-wrap: break-word;
+    white-space: normal;
 
- ul {
-    list-style: none; /* Removes default bullet points */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-    text-align: left;
+    h3 {
+      font-weight: 500;
+    }
+  }
+}
+
+ul {
+  list-style: none;
+  /* Removes default bullet points */
+  margin: 0;
+  /* Removes default margin */
+  padding: 0;
+  /* Removes default padding */
+  text-align: left;
 }
 
 ul li {
-    line-height: 1.5; /* Adjusts line height for better spacing */
-    margin: 4px;
+  margin: 11px;
+  line-height: 21px;
 }
- /* Responsive layout - makes a one column layout instead of a two-column layout */
- @media (max-width: 800px) {
-   .features {
-     flex-direction: column;
-   }
- }
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .features {
+    flex-direction: column;
+  }
+}
