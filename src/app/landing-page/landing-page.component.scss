@@ -1,0 +1,119 @@
+.content {
+    width: 100%;
+    text-align: center;
+}
+
+.header {
+    height: 80vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("/images/banner.jpg");
+    /* Path to your image */
+    background-size: cover;
+    /* Ensures the image covers the entire container */
+    background-position: center;
+    /* Centers the image */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
+}
+
+.content h1 {
+    margin-top: 1.75rem;
+}
+
+.content p {
+    margin-top: 1.5rem;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+}
+
+.title {
+    margin: auto;
+    color: whitesmoke;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 1rem;
+
+    .row {
+        margin: 30px;
+        text-align: center;
+        min-width: 0;
+        overflow-wrap: break-word;
+        white-space: normal;
+
+        h3 {
+            font-weight: 500;
+        }
+    }
+}
+
+ul {
+    list-style: none;
+    /* Removes default bullet points */
+    margin: 0;
+    /* Removes default margin */
+    padding: 0;
+    /* Removes default padding */
+    text-align: left;
+}
+
+ul li {
+    margin: 11px;
+    line-height: 21px;
+}
+.trip-card {
+    max-width: 400px;
+}
+.featured-trips {
+    display: flex;
+    padding: 1.2rem;
+    overflow: scroll;
+}
+.card {
+    padding: 10px;
+}
+.mdc-card__media {
+    height: 200px;
+    object-fit: cover;
+    overflow: hidden;
+}
+.trip-header-image {
+    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+    background-size: cover;
+}
+.mat-mdc-card-title {
+    font-size: large;
+}
+.mat-mdc-card-subtitle {
+    font-size: small;
+}
+.find-more {
+    padding: 20px;
+}
+.footer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: center;
+    background-color: rgb(219, 218, 218);
+    a {
+        padding: 10px;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.382);
+    }
+}
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+    .features {
+        flex-direction: column;
+    }
+}
