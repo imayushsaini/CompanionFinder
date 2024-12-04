@@ -99,18 +99,7 @@ ul li {
 .find-more {
     padding: 20px;
 }
-.footer {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    justify-content: center;
-    background-color: rgb(219, 218, 218);
-    a {
-        padding: 10px;
-        text-decoration: none;
-        color: rgba(0, 0, 0, 0.382);
-    }
-}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 @media (max-width: 800px) {
     .features {

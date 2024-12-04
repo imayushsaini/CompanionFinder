@@ -1,0 +1,21 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: end;
+    background-color: rgb(219, 218, 218);
+    a {
+        padding: 10px;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.382);
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    span {
+        color: rgba(0, 0, 0, 0.382);
+        padding-left: 20px;
+    }
+}
