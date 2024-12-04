@@ -8,4 +8,9 @@
 }
 .sign-in-btn {
     font-size: medium;
+    cursor: pointer;
+}
+
+.sign-in-btn:hover {
+    font-size: large;
 }
