@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>
+  Add your trip details
+</h2>
+<mat-dialog-content>
+  <div class="content">
+    <form class="form">
+      <mat-form-field class="full-width">
+        <mat-label>Starting point</mat-label>
+        <input matInput value="New Delhi">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Destination</mat-label>
+        <input matInput value="Manali">
+      </mat-form-field>
+      <mat-checkbox class="example-margin" [(ngModel)]="checked">Also Return jouney</mat-checkbox> <br>
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date">
+          <input matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>More trip details (itenary)</mat-label>
+        <textarea matInput
+          value="bus mein bethenge , barf mein moj krenge, 3rd day sjopping kerke mast ghar wapis 4th day pe"></textarea>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>How to contact you</mat-label>
+        <textarea matInput value="Ping me on whats app +91 732234 or Instagram: @johnsmithop"> </textarea>
+      </mat-form-field>
+      <button mat-flat-button>Submit</button>
+    </form>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
