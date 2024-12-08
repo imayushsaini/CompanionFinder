@@ -8,9 +8,11 @@ import { FooterComponent } from "../footer/footer.component";
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { NewTripPublishDialogComponent } from '../new-trip-publish-dialog/new-trip-publish-dialog.component';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-trips',
-  imports: [MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, FooterComponent, NavBarComponent, MatDialogModule],
+  imports: [RouterLink, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, FooterComponent, NavBarComponent, MatDialogModule],
   templateUrl: './trips.component.html',
   styleUrl: './trips.component.scss'
 })
