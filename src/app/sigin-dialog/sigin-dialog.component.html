@@ -4,7 +4,9 @@
       Sign in to continue
     </div>
     <div class="signin-options">
-      <button mat-stroked-button>Login with Instagram</button>
+      @if (showLoginButton){
+      <button mat-stroked-button (click)="login()">Login with Google</button>
+      }
     </div>
   </div>
 
