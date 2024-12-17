@@ -38,12 +38,12 @@ export class NavBarComponent {
 
     openDialog() {
         const dialogRef = this.dialog.open(SiginDialogComponent, {
-            height: '350px',
+            height: '440px',
             width: '600px',
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+            this.displayName = result;
         });
     }
     async logout() {

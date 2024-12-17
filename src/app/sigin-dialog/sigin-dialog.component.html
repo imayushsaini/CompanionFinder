@@ -1,16 +1,73 @@
 <mat-dialog-content>
   <div class="content">
     <div class="heading">
+      @if (!showSignUpForm) {
       Sign in to continue
+      }
     </div>
+    <div class="desc">
+      <p>
+        By continuing, you agree to our User Agreement and acknowledge that you understand the Privacy Policy.
+      </p>
+    </div>
+    @if (!showEmailPasswordLoginForm && !showSignUpForm && !showResetForm) {
     <div class="signin-options">
-      @if (showLoginButton | async) {
-      <button mat-stroked-button (click)="loginWithGoogle()">Login with Google</button>
-      }
-      @if (showLogoutButton | async) {
-      <button mat-stroked-button (click)="logout()">Log out</button>
-      }
+      <button mat-stroked-button (click)="loginWithGoogle()">Continue with Google</button>
+      <button mat-stroked-button (click)="openLoginEmailPasswordForm()">Login with email/password</button>
+      <span (click)="openSignupForm()">New here ? Sign up</span>
     </div>
+    }
+    <!-- @if (showEmailPasswordLoginForm) {
+    <form class="signup-form">
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="12345678" [formControl]="passwordFormControl">
+        @if (passwordFormControl.hasError('required')) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <button mat-stroked-button (click)="login()">Login</button>
+    </form>
+    } -->
+    @if (showSignUpForm) {
+    <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="signup()">
+      <mat-form-field class="full-width">
+        <mat-label>Name</mat-label>
+        <input type="text" placeholder="Jhon" matInput formControlName="nameFormControl">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+
+        @if (signupForm.get('emailFormControl')?.errors?.['email'] &&
+        !signupForm.get('emailFormControl')?.errors?.['required']) {
+        <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (signupForm.get('emailFormControl')?.errors?.['required']) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="12345678" formControlName="passwordFormControl">
+        @if (signupForm.get('passwordFormControl')?.errors?.['required']) {
+        <mat-error>Password is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <button mat-stroked-button type="submit" [disabled]="!signupForm.valid">Signup</button>
+    </form>
+    }
   </div>
 
 </mat-dialog-content>

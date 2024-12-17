@@ -5,10 +5,23 @@
     text-align: center;
     height: 100%;
     .heading {
-        padding: 10% 0%;
+        padding: 10px 0px 0px 0px;
         font-size: x-large;
     }
-    .signin-options {
-        padding-top: 29px;
+}
+.signin-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+    height: max-content;
+    button {
+        margin-bottom: 20px;
+        max-width: 300px;
+        min-width: 250px;
     }
+}
+.full-width {
+    width: 100%;
 }

@@ -1,9 +1,5 @@
 // boilerplate from : https://github.com/angular/angularfire/blob/bc926a84d5877eb470055a61c731005b51a1b6d4/sample/src/app/auth/auth.component.ts
-import {
-    AsyncPipe,
-    isPlatformBrowser,
-    isPlatformServer,
-} from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
     Component,
     inject,
@@ -11,7 +7,15 @@ import {
     PLATFORM_ID,
     TransferState,
 } from '@angular/core';
-import { Auth, signInAnonymously, signOut, User } from '@angular/fire/auth';
+import {
+    Auth,
+    createUserWithEmailAndPassword,
+    signInAnonymously,
+    signInWithEmailAndPassword,
+    signOut,
+    updateProfile,
+    User,
+} from '@angular/fire/auth';
 import {
     GoogleAuthProvider,
     onAuthStateChanged,
@@ -30,6 +34,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
     FormControl,
+    FormGroup,
     FormsModule,
     ReactiveFormsModule,
     Validators,
@@ -59,7 +64,6 @@ export const authState = ɵzoneWrap(_authState, true);
     imports: [
         MatDialogModule,
         MatButtonModule,
-        AsyncPipe,
         FormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -76,6 +80,21 @@ export class SiginDialogComponent {
     private readonly transferStateKey = makeStateKey<string | undefined>(
         'auth:uid'
     );
+    showEmailPasswordLoginForm: boolean = false;
+    showSignUpForm: boolean = false;
+    showResetForm: boolean = false;
+
+    signupForm = new FormGroup({
+        emailFormControl: new FormControl('', [
+            Validators.required,
+            Validators.email,
+        ]),
+        nameFormControl: new FormControl('', [Validators.required]),
+        passwordFormControl: new FormControl('', [
+            Validators.required,
+            Validators.minLength(8),
+        ]),
+    });
     protected readonly uid = this.authState
         .pipe(map((u) => u?.uid))
         .pipe(
@@ -104,7 +123,6 @@ export class SiginDialogComponent {
                     if (user) {
                         const idToken = await user.getIdToken();
                         cookies.set('__session', idToken);
-                        this.dialogRef.close();
                     } else {
                         cookies.remove('__session');
                     }
@@ -119,7 +137,6 @@ export class SiginDialogComponent {
                     const idToken = await user?.getIdToken();
                     if (idToken) {
                         cookies.set('__session', idToken);
-                        this.dialogRef.close();
                     } else {
                         cookies.remove('__session');
                     }
@@ -128,7 +145,6 @@ export class SiginDialogComponent {
                     // If another beforeAuthStateChanged rejects, revert the cookie (best-effort)
                     if (priorCookieValue) {
                         cookies.set('__session', priorCookieValue);
-                        this.dialogRef.close();
                     } else {
                         cookies.remove('__session');
                     }
@@ -151,6 +167,46 @@ export class SiginDialogComponent {
     }
 
     async loginWithGoogle() {
-        return await signInWithPopup(this.auth, new GoogleAuthProvider());
+        return signInWithPopup(this.auth, new GoogleAuthProvider()).then(
+            (userCreds) => {
+                this.dialogRef.close();
+            }
+        );
+    }
+
+    openSignupForm() {
+        this.showSignUpForm = true;
+    }
+    openLoginEmailPasswordForm() {
+        this.showEmailPasswordLoginForm = true;
+    }
+    openResetForm() {
+        this.showResetForm = true;
+    }
+    login() {
+        // signInWithEmailAndPassword(
+        //     this.auth,
+        // ).then((userCreds) => {
+        //     console.log('logged in');
+        // });
+    }
+    signup() {
+        createUserWithEmailAndPassword(
+            this.auth,
+            this.signupForm.value.emailFormControl!,
+            this.signupForm.value.passwordFormControl!
+        )
+            .then((userCredentials) => {
+                updateProfile(userCredentials.user, {
+                    displayName: this.signupForm.value.nameFormControl,
+                }).then(() => {
+                    console.log('Profile Created successfully !');
+                    this.dialogRef.close(this.signupForm.value.nameFormControl);
+                });
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
     }
 }
