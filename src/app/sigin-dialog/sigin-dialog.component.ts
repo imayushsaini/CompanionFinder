@@ -4,6 +4,8 @@ import {
     Component,
     inject,
     makeStateKey,
+    OnDestroy,
+    OnInit,
     PLATFORM_ID,
     TransferState,
 } from '@angular/core';
@@ -72,7 +74,7 @@ export const authState = ɵzoneWrap(_authState, true);
     templateUrl: './sigin-dialog.component.html',
     styleUrl: './sigin-dialog.component.scss',
 })
-export class SiginDialogComponent {
+export class SiginDialogComponent implements OnInit, OnDestroy {
     private readonly auth = inject(Auth);
     protected readonly authState = authState(this.auth);
 
@@ -83,7 +85,7 @@ export class SiginDialogComponent {
     showEmailPasswordLoginForm: boolean = false;
     showSignUpForm: boolean = false;
     showResetForm: boolean = false;
-
+    invalidPasswordMessage: string | undefined;
     signupForm = new FormGroup({
         emailFormControl: new FormControl('', [
             Validators.required,
@@ -95,6 +97,17 @@ export class SiginDialogComponent {
             Validators.minLength(8),
         ]),
     });
+    loginForm = new FormGroup({
+        emailFormControl: new FormControl('', [
+            Validators.required,
+            Validators.email,
+        ]),
+        passwordFormControl: new FormControl('', [
+            Validators.required,
+            Validators.minLength(8),
+        ]),
+    });
+
     protected readonly uid = this.authState
         .pipe(map((u) => u?.uid))
         .pipe(
@@ -152,7 +165,13 @@ export class SiginDialogComponent {
             );
         }
     }
-
+    ngOnInit() {
+        this.loginForm
+            .get('passwordFormControl')
+            ?.valueChanges.subscribe((value) => {
+                if (value!) this.invalidPasswordMessage = undefined;
+            });
+    }
     ngOnDestroy(): void {
         this.unsubscribeFromBeforeAuthStateChanged?.();
         this.unsubscribeFromOnIdTokenChanged?.();
@@ -184,11 +203,19 @@ export class SiginDialogComponent {
         this.showResetForm = true;
     }
     login() {
-        // signInWithEmailAndPassword(
-        //     this.auth,
-        // ).then((userCreds) => {
-        //     console.log('logged in');
-        // });
+        signInWithEmailAndPassword(
+            this.auth,
+            this.loginForm.value.emailFormControl!,
+            this.loginForm.value.passwordFormControl!
+        )
+            .then((userCreds) => {
+                console.log('logged in');
+                this.dialogRef.close();
+            })
+            .catch((error) => {
+                this.invalidPasswordMessage = error.message;
+                this.loginForm.get('passwordFormControl')?.setValue('');
+            });
     }
     signup() {
         createUserWithEmailAndPassword(

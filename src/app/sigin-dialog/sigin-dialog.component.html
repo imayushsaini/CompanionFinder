@@ -17,29 +17,33 @@
       <span (click)="openSignupForm()">New here ? Sign up</span>
     </div>
     }
-    <!-- @if (showEmailPasswordLoginForm) {
-    <form class="signup-form">
+    @if (showEmailPasswordLoginForm) {
+    <form class="signup-form" [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+        <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
 
-        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        @if (loginForm.get('emailFormControl')?.errors?.['email'] &&
+        !loginForm.get('emailFormControl')?.errors?.['required']) {
         <mat-error>Please enter a valid email address</mat-error>
         }
-        @if (emailFormControl.hasError('required')) {
+        @if (loginForm.get('emailFormControl')?.errors?.['required']) {
         <mat-error>Email is <strong>required</strong></mat-error>
         }
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="12345678" [formControl]="passwordFormControl">
-        @if (passwordFormControl.hasError('required')) {
+        <input type="password" matInput placeholder="12345678" formControlName="passwordFormControl">
+        @if (loginForm.get('passwordFormControl')?.errors?.['required']) {
         <mat-error>Password is <strong>required</strong></mat-error>
         }
       </mat-form-field>
-      <button mat-stroked-button (click)="login()">Login</button>
+      @if(invalidPasswordMessage!=undefined) {
+      <mat-error class="m-d">Wrong password, :(</mat-error>
+      }
+      <button mat-stroked-button type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
-    } -->
+    }
     @if (showSignUpForm) {
     <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="signup()">
       <mat-form-field class="full-width">

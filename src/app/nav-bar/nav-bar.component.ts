@@ -43,7 +43,7 @@ export class NavBarComponent {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-            this.displayName = result;
+            if (result) this.displayName = result;
         });
     }
     async logout() {
