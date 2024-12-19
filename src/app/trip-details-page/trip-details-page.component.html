@@ -1,7 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div class="header">
+  <div class="nav-back title-colour">
+    <span (click)="onBackButtonPress()">
+      <mat-icon fontIcon="arrow_back_ios" aria-hidden="false" aria-label="back mat-buttonicon"></mat-icon> Back
+    </span>
+  </div>
   <div class="heading">
-    <div class="title">
+    <div class="title title-colour">
       <h1>3 days trip to spitti valley</h1>
       <div class="subtitle">
         <p>Jhon smith travelling from new Delhi to Spitti valley on 29 January 2025.</p>
@@ -64,6 +69,5 @@
       </div>
     </div>
   </div>
-
 </div>
 <app-footer></app-footer>

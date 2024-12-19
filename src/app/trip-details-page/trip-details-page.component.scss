@@ -20,7 +20,6 @@
 
 .title {
     margin: auto;
-    color: whitesmoke;
 }
 
 .options {
@@ -64,4 +63,18 @@
         --mdc-filled-button-container-color,
         var(--mat-sys-primary)
     );
+}
+.nav-back {
+    // position: absolute;
+    padding-top: 4vh;
+    padding-left: 9px;
+    span {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+.title-colour {
+    color: whitesmoke;
 }
