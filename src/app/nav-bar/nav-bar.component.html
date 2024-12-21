@@ -1,18 +1,23 @@
 <mat-toolbar>
-  <div class="main-logo">
+  <div class="main-logo" routerLink="/">
     <img src="/images/logo.jpg" alt="hop on trip logo">
   </div>
 
   <img src="/images/hop-on-trip.png" alt="" height="30px">
   <span class="example-spacer"></span>
-  @if (!signedIn) {
+  @if (!signedIn && !onProfilePage) {
   <span class="sign-in-btn" (click)="openDialog()">Sign in</span>
   }
-  @if (signedIn) {
+  @if (signedIn && !onProfilePage) {
   <span class="sign-in-btn" [matMenuTriggerFor]="menu"> {{displayName}}</span>
   <mat-menu #menu="matMenu" xPosition="before">
-    <button mat-menu-item>My Profile</button>
+
+    <button mat-menu-item routerLink="/profile">My Profile</button>
+
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
+  }
+  @if (onProfilePage) {
+  <span class="sign-in-btn" (click)="logout()">Logout</span>
   }
 </mat-toolbar>
