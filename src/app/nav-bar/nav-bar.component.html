@@ -1,15 +1,15 @@
 <mat-toolbar>
-  <div class="main-logo" routerLink="/">
+  <div class="main-logo btn" routerLink="/trips">
     <img src="/images/logo.jpg" alt="hop on trip logo">
   </div>
 
-  <img src="/images/hop-on-trip.png" alt="" height="30px">
+  <img src="/images/hop-on-trip.png" alt="" height="30px" routerLink="/trips" class="btn">
   <span class="example-spacer"></span>
   @if (!signedIn && !onProfilePage) {
-  <span class="sign-in-btn" (click)="openDialog()">Sign in</span>
+  <span class="sign-in-btn btn" (click)="openDialog()">Sign in</span>
   }
   @if (signedIn && !onProfilePage) {
-  <span class="sign-in-btn" [matMenuTriggerFor]="menu"> {{displayName}}</span>
+  <span class="sign-in-btn btn" [matMenuTriggerFor]="menu"> {{displayName}}</span>
   <mat-menu #menu="matMenu" xPosition="before">
 
     <button mat-menu-item routerLink="/profile">My Profile</button>
@@ -18,6 +18,6 @@
   </mat-menu>
   }
   @if (onProfilePage) {
-  <span class="sign-in-btn" (click)="logout()">Logout</span>
+  <span class="sign-in-btn btn" (click)="logout()">Logout</span>
   }
 </mat-toolbar>

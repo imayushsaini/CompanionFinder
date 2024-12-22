@@ -1,0 +1,61 @@
+<app-nav-bar [onProfilePage]="true"></app-nav-bar>
+<div class="main">
+  <div class="container">
+    <div class="profile-info">
+      <div class="avtar">
+        <img src="{{profilePhoto}}" alt="" class="profile-picture">
+        <div class="placeholder">P</div>
+      </div>
+      <div class="id">
+        @if (editMode) {
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input type="email" matInput [formControl]="nameFormControl" placeholder="Jhon Misty">
+
+          @if (nameFormControl.hasError('required')) {
+          <mat-error>Name is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+        }
+        @else {
+        <span class="name">{{name}}</span>
+        }<br>
+        <span class="email">{{email}}</span>
+      </div>
+    </div>
+    <div class="more-info">
+      <div class="about">
+        <h3>About me</h3>
+        @if (editMode) {
+
+        <mat-form-field class="full-width">
+          <mat-label>Something about you</mat-label>
+          <textarea matInput placeholder="Ex. It makes me feel..." [formControl]="aboutFormControl"></textarea>
+        </mat-form-field>
+        } @else {
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo veritatis eum labore. Hic modi quas, dolorum
+          amet, ex expedita soluta iusto eum sequi ab laboriosam. Blanditiis sint ad mollitia nihil.
+        </p>
+        }
+      </div>
+      <div class="my-trips">
+        <h3>My Trips</h3>
+        <div class="my-trips-btn">
+          Click to see trips posted by you
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (editMode) {
+  <div class="save-btn acnt-btn">
+    <button mat-fab extended (click)="onSave()"><mat-icon>save</mat-icon> Save</button>
+  </div>
+  } @else {
+  <div class="edit-btn acnt-btn">
+    <button mat-fab extended (click)="onEdit()"><mat-icon>edit</mat-icon> Edit</button>
+  </div>
+  }
+
+
+</div>

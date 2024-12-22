@@ -1,0 +1,62 @@
+.container {
+    max-width: 630px;
+    margin: auto;
+    padding: 20px;
+    align-items: center;
+}
+.avtar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Makes the image round */
+    border: 3px solid #4caf50; /* Optional: Add a border */
+    object-fit: cover; /* Ensures the image is properly cropped */
+    display: block; /* Ensure it's visible when loaded */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.placeholder {
+    display: none; /* Hidden by default, shown if image fails */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Makes the placeholder round */
+    border: 3px dashed #4caf50; /* Dashed border for placeholder */
+    background-color: #f0f0f0; /* Light background for placeholder */
+    color: #4caf50; /* Text color */
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .id {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .name {
+        font-size: larger;
+        font-weight: 580;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+.acnt-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+}
