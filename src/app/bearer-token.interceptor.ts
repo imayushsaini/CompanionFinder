@@ -15,7 +15,6 @@ const addBearerToken = async (
     const auth = inject(Auth);
     const currentUser = auth.currentUser;
     const token = await currentUser?.getIdToken();
-    console.log('toke is' + token);
     if (token) {
         req = req.clone({
             setHeaders: { Authorization: `Bearer ${token}` },

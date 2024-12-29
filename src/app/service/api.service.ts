@@ -6,10 +6,17 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class ApiService {
-    readonly backendURL: string = 'https://google.com/q?=ayush';
+    readonly apiUrl: string =
+        'https://companionfinder.ballistica.workers.dev/api';
     constructor(private http: HttpClient) {}
 
     getUserPosts(): Observable<any> {
-        return this.http.get(this.backendURL);
+        return this.http.get(this.apiUrl + '/trips');
+    }
+    fetchProfile() {
+        return this.http.get(this.apiUrl + '/user');
+    }
+    updateProfile(about: string) {
+        return this.http.post(this.apiUrl + '/user', { about: about });
     }
 }
