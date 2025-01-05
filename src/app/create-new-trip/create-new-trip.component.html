@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="top">
+    <div class="close-btn" (click)="onClose()"><mat-icon>close</mat-icon></div>
+  </div>
+  <div class="main">
+    <mat-stepper linear #stepper>
+      <mat-step [stepControl]="journeyOverviewFormGroup" [editable]="true">
+        <form [formGroup]="journeyOverviewFormGroup">
+          <ng-template matStepLabel>Journey overview</ng-template>
+          <div class="my-form">
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" placeholder="title" required>
+            </mat-form-field> <br>
+            <mat-form-field>
+              <mat-label>Starting Point</mat-label>
+              <input matInput formControlName="startPoint" placeholder="Delhi" required>
+            </mat-form-field> <br>
+            <mat-form-field>
+              <mat-label>Destination</mat-label>
+              <input matInput formControlName="destination" placeholder="Manali" required>
+            </mat-form-field> <br>
+            <mat-form-field>
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" formControlName="startDate">
+                <input matEndDate placeholder="End date" formControlName="endDate">
+              </mat-date-range-input>
+              <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+          </div>
+
+          <div class="stepper-nav">
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="itineraryStepperControl" [editable]="true">
+        <form>
+          <ng-template matStepLabel>Itinerary</ng-template>
+          <mat-stepper orientation="vertical" [linear]="true" #stepper>
+            <ng-container *ngFor="let dayPlan of dayPlans;let i = index">
+              <mat-step [stepControl]="dayPlan">
+                <form [formGroup]="dayPlan">
+                  <ng-template matStepLabel>Day {{i}} plan</ng-template>
+                  <mat-form-field>
+                    <mat-label>day plan</mat-label>
+                    <input matInput formControlName="plan" placeholder="Ex. 1 Main St, New York, NY" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+            </ng-container>
+            <mat-step>
+              <ng-template matStepLabel>Done</ng-template>
+              <p>Done, add additional details in next step</p>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+          <div class="stepper-nav">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Extra & Contact info</ng-template>
+        <form [formGroup]="additionaInfoFormGroup">
+          <div class="my-form">
+            <mat-form-field>
+              <mat-label>Additional Info</mat-label>
+              <input matInput formControlName="additionalInfo" placeholder="title" required>
+            </mat-form-field> <br>
+            <mat-form-field>
+              <mat-label>Contact Details</mat-label>
+              <input matInput formControlName="contactDetails" placeholder="Delhi" required>
+            </mat-form-field> <br>
+          </div>
+        </form>
+        <div class="stepper-nav">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="submit()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

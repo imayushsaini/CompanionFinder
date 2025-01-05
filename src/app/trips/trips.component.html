@@ -19,8 +19,13 @@
       <!-- <div class="filter">filter by</div> -->
     </div>
     <div class="new">
-      <button mat-raised-button (click)="openDialog()">+ Publish Your Trip</button>
+      @if (!showCreateTripForm) {
+      <button mat-raised-button (click)="onNewTrip()">+ Publish Your Trip</button>
+      }
     </div>
+    @if (showCreateTripForm) {
+    <app-create-new-trip (close)="onClose()"></app-create-new-trip>
+    }
     <div class="items">
       <div class="item">
         <mat-card class="trip-card" appearance="outlined">

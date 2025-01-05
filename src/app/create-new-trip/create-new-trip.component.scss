@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+}
+.top {
+    display: flex;
+    justify-content: end;
+}
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+    margin-top: 16px;
+}
+
+.my-form {
+    max-width: 400px;
+    margin: auto;
+}
+.mat-mdc-form-field {
+    width: 100%;
+}
+.stepper-nav {
+    display: flex;
+    justify-content: flex-end;
+}
+.close-btn {
+    cursor: pointer;
+}
