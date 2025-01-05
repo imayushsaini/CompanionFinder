@@ -11,6 +11,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../service/api.service';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { CreateNewTripComponent } from '../create-new-trip/create-new-trip.component';
 
 @Component({
     selector: 'app-trips',
@@ -24,6 +25,7 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
         FooterComponent,
         NavBarComponent,
         MatDialogModule,
+        CreateNewTripComponent,
     ],
     templateUrl: './trips.component.html',
     styleUrl: './trips.component.scss',
@@ -32,23 +34,19 @@ export class TripsComponent {
     readonly dialog = inject(MatDialog);
     readonly apiService = inject(ApiService);
     readonly auth = inject(Auth);
+    showCreateTripForm = false;
     constructor() {
         onAuthStateChanged(this.auth, () => {
             this.callApi();
         });
     }
-    openDialog() {
-        const dialogRef = this.dialog.open(NewTripPublishDialogComponent, {
-            height: '550px',
-            width: '600px',
-        });
-
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
-        });
+    onNewTrip() {
+        this.showCreateTripForm = true;
+    }
+    onClose() {
+        this.showCreateTripForm = false;
     }
     callApi() {
-        console.log('calling api now');
         this.apiService.getUserPosts().subscribe((res) => {
             console.log(res);
         });
