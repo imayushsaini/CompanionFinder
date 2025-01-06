@@ -19,4 +19,7 @@ export class ApiService {
     updateProfile(about: string) {
         return this.http.post(this.apiUrl + '/user', { about: about });
     }
+    createTrip(trip: any) {
+        return this.http.post(this.apiUrl + '/trips', trip);
+    }
 }

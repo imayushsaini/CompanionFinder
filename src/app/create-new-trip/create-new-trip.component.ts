@@ -16,6 +16,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ApiService } from '../service/api.service';
+interface Trip {
+    title: string;
+    startDate: Date;
+    endDate: Date;
+    from_location: string;
+    to_location: string;
+    itinerary: string[];
+    contactDetails: string;
+    additional_info: string;
+    bannerUrl?: string[];
+}
+
 @Component({
     selector: 'app-create-new-trip',
     imports: [
@@ -38,7 +51,7 @@ export class CreateNewTripComponent {
     DAYS_COUNT = 0;
     @Output() close = new EventEmitter<void>();
     dayPlans: FormGroup[] = [];
-    constructor() {
+    constructor(private apiService: ApiService) {
         this.journeyOverviewFormGroup.controls.startDate.valueChanges.subscribe(
             (value) => {
                 if (value) {
@@ -102,20 +115,29 @@ export class CreateNewTripComponent {
         }
     }
     submit() {
-        const payload = {
-            title: this.journeyOverviewFormGroup.controls.title.value,
-            startPoint: this.journeyOverviewFormGroup.controls.startPoint.value,
-            destination:
-                this.journeyOverviewFormGroup.controls.destination.value,
-            startDate: this.journeyOverviewFormGroup.controls.startDate.value,
-            endDate: this.journeyOverviewFormGroup.controls.endDate.value,
+        const payload: Trip = {
+            title: this.journeyOverviewFormGroup.controls.title.value!,
+            from_location:
+                this.journeyOverviewFormGroup.controls.startPoint.value!,
+            to_location:
+                this.journeyOverviewFormGroup.controls.destination.value!,
+            startDate: this.journeyOverviewFormGroup.controls.startDate.value!,
+            endDate: this.journeyOverviewFormGroup.controls.endDate.value!,
             itinerary: this.dayPlans.map((form) => form.controls['plan'].value), // This is the array of day plans
-            additionalInfo:
-                this.additionaInfoFormGroup.controls.additionalInfo.value,
+            additional_info:
+                this.additionaInfoFormGroup.controls.additionalInfo.value!,
             contactDetails:
-                this.additionaInfoFormGroup.controls.contactDetails.value,
+                this.additionaInfoFormGroup.controls.contactDetails.value!,
         };
-        console.log(payload);
+        this.apiService.createTrip(payload).subscribe({
+            next: (res) => {
+                console.log(res);
+                this.onClose();
+            },
+            error: (err) => {
+                console.error(err);
+            },
+        });
     }
     onClose() {
         this.close.emit();
